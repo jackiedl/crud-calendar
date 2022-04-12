@@ -3,25 +3,14 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from './App';
 import { Provider } from "react-redux";
-// import { createStore, applyMiddleware, compose } from "redux";
-// import thunk from "redux-thunk";
-import { createStore, applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-
-import rootReducer from "./redux/rootReducer";
+import configureStore from "./redux/store";
 
 const contianer = document.getElementById('root');
 const root = createRoot(contianer);
 
-//const store = createStore(rootReducer, compose(applyMiddleware(thunk)))
-
-const store = createStore(rootReducer, composeWithDevTools());
-
-console.log(store.getState())
-
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <Provider store={configureStore}>
       <App />
     </Provider>
   </React.StrictMode>
