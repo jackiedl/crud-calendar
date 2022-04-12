@@ -5,7 +5,7 @@ import Box from "@mui/material/Box"
 import Navbar from "../navbar/Navbar";
 import Calendar from "../calendar/Calendar";
 
-function Home(){
+export default function Home(){
 
   return(
     <Box>
@@ -13,7 +13,4 @@ function Home(){
       <Calendar />
     </Box>
   )
-
 }
-
-export default Home;
