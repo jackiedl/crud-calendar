@@ -1,12 +1,15 @@
 import React from "react";
 
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
-export default function CalendarCell(){
+export default function CalendarCell(props){
 
-  
   return (
-    <div>
-
-    </div>
+    <Box sx={{flex: 1, borderLeft: "#dadce0 1px solid"}}>
+      <Typography>
+        {props.day}
+      </Typography>
+    </Box>
   )
 }
