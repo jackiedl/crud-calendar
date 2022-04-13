@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 
 import Grid from "@mui/material/Grid";
 import Box from '@mui/material/Box';
@@ -8,9 +9,7 @@ import CalendarCell from "./CalendarCell";
 const weekname = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT",]
 
 export default function Calendar(){
-  const [calendar] = useState(getCalendarArray(3,2022));
-  
-
+  const calendar = useSelector(state => getCalendarArray(state.date.month, state.date.year));
   const showWeekDate = () => {
     return(
       <Grid item container columns={7} component="div" wrap="nowrap">
@@ -59,7 +58,7 @@ function getCalendarArray(month, year){
   const numberOfDaysInMonth = new Date(year, month, 0).getDate();
   const numberOfDaysInPrevMonth = new Date(prevYear, prevMonth, 0).getDate();
   let calendar = []
-  let startWeekdate = new Date(year + "-" + month + "-01").getDay();
+  let startWeekdate = new Date(year + "-" + month + "-1").getDay();
   let currentDay = 1;
   let nextMonthFlag = false;
 
