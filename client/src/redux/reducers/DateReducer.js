@@ -4,7 +4,7 @@ const d = new Date();
 
 const initialState = {
   day: d.getDay(),
-  month: d.getMonth(),
+  month: d.getMonth()+1,
   year: d.getFullYear(),
 }
 

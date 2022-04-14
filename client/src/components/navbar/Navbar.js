@@ -12,11 +12,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
+const months = ["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "Novemeber", "December"];
+
 // (menuIcon) CRUD Calendar    Current Month  < > (Logout Icon)
 export default function NavBar() {
   const date = useSelector(state => state.date);
   const dispatch = useDispatch();
 
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{ background: "transparent", boxShadow: "none"}}>
@@ -34,7 +37,7 @@ export default function NavBar() {
             <NavigateNextIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "#5f6368"}}>
-            {date.month} {date.year}
+            {months[date.month-1] } {date.year}
           </Typography>
           <Button style={{color: "#5f6368"}}> Login </Button>
         </Toolbar>

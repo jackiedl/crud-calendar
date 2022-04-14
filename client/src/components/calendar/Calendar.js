@@ -10,6 +10,7 @@ const weekname = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT",]
 
 export default function Calendar(){
   const calendar = useSelector(state => getCalendarArray(state.date.month, state.date.year));
+
   const showWeekDate = () => {
     return(
       <Grid item container columns={7} component="div" wrap="nowrap">
@@ -25,7 +26,6 @@ export default function Calendar(){
       </Grid>
     )
   }
-
   const showCalendar = () => {
     return(
       calendar.map((row, rowIndex) => (
@@ -37,6 +37,7 @@ export default function Calendar(){
       ))
     )
   }
+
   return(
     <Grid container sx={{textAlign: "center", borderTop: "#dadce0 1px solid"}}>
       <Grid item container columns={7} component="div">
@@ -53,7 +54,7 @@ export default function Calendar(){
 function getCalendarArray(month, year){
   const prevMonth = (month - 1 > 1 ? month - 1 : 12)
   const prevYear = (prevMonth === 12 ? year - 1: year);
-  const nextMonth = (month + 1 > 12 ? 1 : month + 1);
+  const nextMonth = (month + 1 > 11 ? 1 : month + 1);
   const nextYear = (nextMonth === 1 ? year + 1: year);
   const numberOfDaysInMonth = new Date(year, month, 0).getDate();
   const numberOfDaysInPrevMonth = new Date(prevYear, prevMonth, 0).getDate();
