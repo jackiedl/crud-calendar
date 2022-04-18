@@ -19,7 +19,6 @@ export default function NavBar() {
   const date = useSelector(state => state.date);
   const dispatch = useDispatch();
 
-  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{ background: "transparent", boxShadow: "none"}}>
@@ -39,7 +38,7 @@ export default function NavBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "#5f6368"}}>
             {months[date.month-1] } {date.year}
           </Typography>
-          <Button style={{color: "#5f6368"}}> Login </Button>
+          <Button style={{color: "#5f6368"}}> Logout </Button>
         </Toolbar>
       </AppBar>
     </Box>
