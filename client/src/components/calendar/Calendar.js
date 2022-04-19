@@ -1,9 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { getDaysArray, isToday } from "../utlis";
 
-import { getDaysArray } from "../utlis";
-
-import Grid from "@mui/material/Grid";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CalendarCell from "./CalendarCell";
@@ -11,6 +9,7 @@ import CalendarCell from "./CalendarCell";
 const weekname = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT",]
 
 export default function Calendar(){
+  const cal = useSelector(state => state.calendar);
   const date = useSelector(state => state.date);
   const calendar = getDaysArray(date.month, date.year);
   const today = new Date();
@@ -22,39 +21,44 @@ export default function Calendar(){
 
   const showWeekDate = () => {
     return(
-      <Grid item container columns={7} component="div" wrap="nowrap">
+      <Box display="grid" gridTemplateColumns="repeat(7, 1fr)">
       {
         weekname.map((val, index) => (
-        <Box key={val+index} sx={{flex: 1, borderLeft: "#dadce0 1px solid"}}>
+        <Box key={val+index} gridColumn="span 1" sx={{flex: 1, borderLeft: "#dadce0 1px solid"}}>
           <Typography>
             {val}
           </Typography>
         </Box>
       ))
       }    
-      </Grid>
+      </Box>
     )
   }
   const showCalendar = () => {
     return(
       calendar.map((row, rowIndex) => (
-        <Grid key={rowIndex} item container columns={7} sx={{wrap:"nowrap", borderBottom: "#dadce0 1px solid"}}>
+        <Box key={rowIndex}  display="grid" gridTemplateColumns="repeat(7, 1fr)" sx={{ borderBottom: "#dadce0 1px solid" }}>
           {row.map((day, dayIndex) => (
-            <CalendarCell key={day.month+dayIndex} day={day} today={todayObject}/>
+            <CalendarCell key={day.month+dayIndex} day={day} today={isToday(todayObject, day)}/>
           ))}
-        </Grid>
+        </Box>
       ))
     )
   }
 
   return(
-    <Grid container sx={{textAlign: "center", borderTop: "#dadce0 1px solid"}}>
-      <Grid item container columns={7} component="div">
-        {showWeekDate()}
-      </Grid>
-      <Grid item container sx={{ height:"105vh" }}>
-        {showCalendar()};
-      </Grid>
-    </Grid>
+    <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" sx={{textAlign: "center", borderTop: "#dadce0 1px solid"}}>
+
+      {cal.menuIsOpen ? <Box gridColumn="span 3" sx={{borderBottom: "#dadce0 1px solid"}}></Box> : ""}
+
+      <Box gridColumn={cal.menuIsOpen ? "span 9" : "span 12"}>
+        <Box sx={{ width: 1 }}>
+          {showWeekDate()}
+        </Box>
+        <Box sx={{ width: 1 }}>
+          {showCalendar()}
+        </Box>
+      </Box>
+    </Box>
   )
 }

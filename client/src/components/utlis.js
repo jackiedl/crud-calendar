@@ -1,3 +1,7 @@
+export function isToday(dateObj1, dateObj2){
+  return (dateObj1.day === dateObj2.day && dateObj1.month === dateObj2.month && dateObj1.year === dateObj2.year)
+}
+
 export function getDaysArray(month, year){
   const prevMonth = (month - 1 > 1 ? month - 1 : 12)
   const prevYear = (prevMonth === 12 ? year - 1: year);

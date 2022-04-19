@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { prevMonth, nextMonth } from "../../redux/actions/DateActions"
+import { menuClick } from '../../redux/actions/CalendarActions';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -17,13 +18,14 @@ const months = ["January", "Feburary", "March", "April", "May", "June", "July", 
 // (menuIcon) CRUD Calendar    Current Month  < > (Logout Icon)
 export default function NavBar() {
   const date = useSelector(state => state.date);
+  const calendar = useSelector(state => state.calendar);
   const dispatch = useDispatch();
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{ background: "transparent", boxShadow: "none"}}>
         <Toolbar>
-          <IconButton size="large" edge="start" aria-label="menu" sx={{ mr: 2, color: "#5f6368" }}>
+          <IconButton size="large" edge="start" aria-label="menu" sx={{ mr: 2, color: "#5f6368" }} onClick={() => dispatch(menuClick(calendar))}>
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: .1, color: "#5f6368"}}>
