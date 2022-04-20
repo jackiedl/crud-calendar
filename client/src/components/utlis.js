@@ -1,7 +1,15 @@
+const WEEKDATE = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+const MONTH = ["Janurary", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+export function getMonth(month){
+  return MONTH[month];
+}
+export function getWeekdate(weekdate){
+  return WEEKDATE[weekdate];
+}
 export function isToday(dateObj1, dateObj2){
   return (dateObj1.day === dateObj2.day && dateObj1.month === dateObj2.month && dateObj1.year === dateObj2.year)
 }
-
 export function getDaysArray(month, year){
   const prevMonth = (month - 1 > 1 ? month - 1 : 12)
   const prevYear = (prevMonth === 12 ? year - 1: year);
@@ -39,11 +47,11 @@ export function getDaysArray(month, year){
   }
   return calendar;
 }
-
-function createDateObject( day, month, year){
+function createDateObject(day, month, year){
   return {
     day: day,
     month: month,
     year: year,
   }
 }
+
