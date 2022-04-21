@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 
-import PostEventRoutes from "./routes/PostEventRoute.js";
+import PostTaskRoutes from "./routes/PostTaskRoute.js";
 
 dotenv.config();
 
@@ -14,7 +14,7 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
-app.use("/events", PostEventRoutes);
+app.use("/tasks", PostTaskRoutes);
 
 const CONNECTION_URL = process.env.CONNECTION_URL;
 const PORT = process.env.PORT || 5000;
