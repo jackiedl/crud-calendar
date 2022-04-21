@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import EventForm from "./EventForm";
+import TaskForm from "./TaskForm";
 
 import Typography from '@mui/material/Typography';
 import Box from "@mui/material/Box";
@@ -16,7 +16,7 @@ export default function CalendarCell(props){
         {props.day.day} 
        </Typography>
       </Box>
-      <EventForm date={props.day} open={open} close={handleClose} />
+      <TaskForm date={props.day} open={open} close={handleClose} />
     </Box>
   )
 }
