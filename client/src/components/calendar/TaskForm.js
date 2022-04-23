@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { getMonth } from "../utlis";
+import { useDispatch } from "react-redux";
+
+import { createTask } from "../../redux/actions/TaskActions";
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,6 +18,20 @@ import Toolbar from '@mui/material/Toolbar';
 import TextField from '@mui/material/TextField';
 
 export default function TaskForm(props){
+  const [taskData, setTaskData] = useState({
+    creator: "Admin",
+    title: "",
+    description: "",
+    date: props.date
+  });
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(createTask(taskData))
+  }
 
   return (
     <Dialog
@@ -37,30 +54,12 @@ export default function TaskForm(props){
         </AppBar>
       </DialogTitle>
       <DialogContent>
-        <Box 
-          componen="form" 
-          noValidate 
-          autoComplete="off"   
-          sx={{
-          '& .MuiTextField-root': { m: 1},
-        }}>
-          <TextField 
-              fullWidth={true}
-              id="task-title"
-              label="Add Task Title"
-              variant="filled"
-            />
-          <TextField 
-            fullWidth={true}
-            id="task-description"
-            label="Description"
-            multiline
-            rows={4}
-            variant="filled"
-          />
+        <Box component="form" noValidate autoComplete="off" sx={{'& .MuiTextField-root': { m: 1}, }}>
+          <TextField fullWidth={true} id="task-title" label="Add Task Title" variant="filled" value={taskData.title} onChange={(e) => setTaskData({...taskData, title: e.target.value})}/>
+          <TextField fullWidth={true} id="task-description" label="Description" multiline rows={4} variant="filled" value={taskData.description} onChange={(e) => setTaskData({...taskData, description: e.target.value})} />
         </Box>
         <DialogActions>
-          <Button onClick={props.close} sx={{}}>
+          <Button onClick={handleSubmit} sx={{}}>
             Submit
           </Button>
         </DialogActions>
