@@ -1,10 +1,10 @@
 import express from "express";
 
-import { getEvents, createEvent } from "../controllers/PostEventController.js";
+import { getTasks, createTasks } from "../controllers/PostTaskController.js";
 
 const router = express.Router();
 
-router.get("/", getEvents);
-router.post("/", createEvent);
+router.get("/", getTasks);
+router.post("/", createTasks);
 
 export default router;

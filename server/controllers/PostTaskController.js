@@ -1,6 +1,6 @@
-import PostEvent from "../models/PostEventModel.js";
+import PostTask from "../models/PostTaskModel.js";
 
-export const getEvents = async (req, res) => {
+export const getTasks = async (req, res) => {
   try{
     const events = await PostEvent.find();
 
@@ -11,10 +11,10 @@ export const getEvents = async (req, res) => {
   }
 }
 
-export const createEvent = async (req, res) => {
+export const createTasks = async (req, res) => {
   const event = req.body;
 
-  const newEvent = new PostEvent(event);
+  const newEvent = new PostTask(event);
 
   try{
     await newEvent.save()
