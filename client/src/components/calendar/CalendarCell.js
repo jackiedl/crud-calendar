@@ -9,7 +9,7 @@ export default function CalendarCell(props){
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  
   return (
     <Box container>
       <Box gridColumn="span 1"  display="flex" flexDirection="column" height="15vh" maxHeight="15vh" sx={{ borderLeft: "#dadce0 1px solid"}} onClick={handleOpen}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getMonth } from "../utlis";
 import { useDispatch } from "react-redux";
 
@@ -20,17 +20,29 @@ import TextField from '@mui/material/TextField';
 export default function TaskForm(props){
   const [taskData, setTaskData] = useState({
     creator: "Admin",
-    title: "",
+    title:"",
     description: "",
     date: props.date
   });
+
+  useEffect(() => {
+    if (!props.open){
+      setTaskData({
+        creator: "Admin",
+        title: "",
+        description: "",
+        date: props.date
+      })
+    }
+  }, [props.date, props.open])
+
 
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     dispatch(createTask(taskData))
+    props.close();
   }
 
   return (

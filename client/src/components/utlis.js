@@ -10,6 +10,15 @@ export function getWeekdate(weekdate){
 export function isToday(dateObj1, dateObj2){
   return (dateObj1.day === dateObj2.day && dateObj1.month === dateObj2.month && dateObj1.year === dateObj2.year)
 }
+export function getDayTask(today, tasks){
+  let todayTask = []
+  for (let i = 0; i < tasks.length; i++){
+    if (isToday(today, tasks[i].date)){
+      todayTask.push(tasks[i]);
+    }
+  }
+  return todayTask;
+}
 export function getDaysArray(month, year){
   const prevMonth = (month - 1 > 1 ? month - 1 : 12)
   const prevYear = (prevMonth === 12 ? year - 1: year);

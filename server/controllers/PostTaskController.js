@@ -2,7 +2,7 @@ import PostTask from "../models/PostTaskModel.js";
 
 export const getTasks = async (req, res) => {
   try{
-    const events = await PostEvent.find();
+    const events = await PostTask.find();
 
     res.status(200).json(events);
 
