@@ -2,9 +2,9 @@ import PostTask from "../models/PostTaskModel.js";
 
 export const getTasks = async (req, res) => {
   try{
-    const events = await PostTask.find();
+    const tasks = await PostTask.find();
 
-    res.status(200).json(events);
+    res.status(200).json(tasks);
 
   }catch (error){
     res.status(404).json({ message: error.message })
@@ -12,16 +12,24 @@ export const getTasks = async (req, res) => {
 }
 
 export const createTasks = async (req, res) => {
-  const event = req.body;
+  const task = req.body;
 
-  const newEvent = new PostTask(event);
+  const newTask = new PostTask(task);
 
   try{
-    await newEvent.save()
+    await newTask.save()
     
-    res.status(201).json(newEvent);
+    res.status(201).json(newTask);
 
   }catch (error){
     res.status(409).json({ message: error.message })
   }
+}
+
+export const updateTask = async (req, res) => {
+  
+}
+
+export const deleteTask = async (req, res) => {
+
 }
