@@ -1,49 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { getMonth } from "../utlis";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
 
-import { createTask } from "../../redux/actions/TaskActions";
+import { useSelector} from "react-redux";
+import { getMonth, getDayTask } from "../utlis";
+
+import NewTask from "./NewTask";
+import TaskCard from "./TaskCard";
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
 import Typography from "@mui/material/Typography";
 import Toolbar from '@mui/material/Toolbar';
-import TextField from '@mui/material/TextField';
 
 export default function TaskForm(props){
-  const [taskData, setTaskData] = useState({
-    creator: "Admin",
-    title:"",
-    description: "",
-    date: props.date
-  });
+//create new UI to show tasks for that day and update/delete them
+  const tasks = useSelector((state) => state.task);
+  const todayTask = getDayTask(props.date, tasks)
 
+  const [value, setValue] = useState("1");
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  //add settimeout to fix bug where it switches when closed
   useEffect(() => {
     if (!props.open){
-      setTaskData({
-        creator: "Admin",
-        title: "",
-        description: "",
-        date: props.date
-      })
+      setValue("1")
     }
-  }, [props.date, props.open])
-
-
-  const dispatch = useDispatch();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(createTask(taskData))
-    props.close();
-  }
+  }, [props.open])
 
   return (
     <Dialog
@@ -66,15 +58,20 @@ export default function TaskForm(props){
         </AppBar>
       </DialogTitle>
       <DialogContent>
-        <Box component="form" noValidate autoComplete="off" sx={{'& .MuiTextField-root': { m: 1}, }}>
-          <TextField fullWidth={true} id="task-title" label="Add Task Title" variant="filled" value={taskData.title} onChange={(e) => setTaskData({...taskData, title: e.target.value})}/>
-          <TextField fullWidth={true} id="task-description" label="Description" multiline rows={4} variant="filled" value={taskData.description} onChange={(e) => setTaskData({...taskData, description: e.target.value})} />
+        <Box sx={{ width: '100%', typography: 'body1' }}>
+          <TabContext value={value}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <TabList onChange={handleChange} aria-label="Task Form tabs">
+                <Tab label="Add Task" value="1" />
+                <Tab label="View/Edit Tasks" value="2" />
+              </TabList>
+            </Box>
+            <NewTask value={"1"} date={props.date} close={props.close}/>
+            <Box display="flex" flexDirection="column" sx={{overflow: "hidden", overflowY: "scroll", "&::-webkit-scrollbar": {display: "none"}}}>
+
+            </Box>
+          </TabContext>
         </Box>
-        <DialogActions>
-          <Button onClick={handleSubmit} sx={{}}>
-            Submit
-          </Button>
-        </DialogActions>
       </DialogContent>
     </Dialog>
   );

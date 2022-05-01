@@ -13,10 +13,10 @@ export default function TaskBar(props){
   const showTaskBar = () => {
     const todayTask = getDayTask(props.date, tasks)
     return(
-      <Box display="flex" flexDirection="column" sx={{overflow: "hidden", overflowY: "scroll", "&::-webkit-scrollbar": {display: "none"}}}>
+      <Box display="flex" flexDirection="column" sx={{zIndex: 1000, overflow: "hidden", overflowY: "scroll", "&::-webkit-scrollbar": {display: "none"}}}>
         {
           todayTask.map((val, index) => (
-            <Button key={val.title + index} variant="contained" sx={{justifyContent: "flex-start"}}>
+            <Button  key={val.title + index} variant="contained" sx={{justifyContent: "flex-start" }}>
               <Typography> {val.title}</Typography>
             </Button>
           ))
