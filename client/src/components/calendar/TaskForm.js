@@ -4,7 +4,7 @@ import { useSelector} from "react-redux";
 import { getMonth, getDayTask } from "../utlis";
 
 import NewTask from "./NewTask";
-import TaskCard from "./TaskCard";
+import TaskCardContainer from "./TaskCardContainer";
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -67,9 +67,7 @@ export default function TaskForm(props){
               </TabList>
             </Box>
             <NewTask value={"1"} date={props.date} close={props.close}/>
-            <Box display="flex" flexDirection="column" sx={{overflow: "hidden", overflowY: "scroll", "&::-webkit-scrollbar": {display: "none"}}}>
-
-            </Box>
+            <TaskCardContainer value={"2"} tasks={todayTask}/>
           </TabContext>
         </Box>
       </DialogContent>

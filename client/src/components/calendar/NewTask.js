@@ -37,6 +37,5 @@ export default function NewTask(props){
           </Button>
         </DialogActions> 
     </TabPanel>
-  
   )
 }
