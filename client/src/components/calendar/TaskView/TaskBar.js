@@ -16,7 +16,7 @@ export default function TaskBar(props){
       <Box display="flex" flexDirection="column" sx={{zIndex: 1000, overflow: "hidden", overflowY: "scroll", "&::-webkit-scrollbar": {display: "none"}}}>
         {
           todayTask.map((val, index) => (
-            <Button  key={val.title + index} variant="contained" sx={{justifyContent: "flex-start" }}>
+            <Button  key={val.title + index} variant="contained" sx={{marginBottom:0.5, justifyContent: "flex-start" }}>
               <Typography> {val.title}</Typography>
             </Button>
           ))
