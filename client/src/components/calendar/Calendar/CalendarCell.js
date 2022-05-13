@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import TaskForm from "./TaskForm";
-import TaskBar from "./TaskBar";
+import TaskForm from "../TaskView/TaskForm";
+import TaskBar from "../TaskView/TaskBar";
 
 import Typography from '@mui/material/Typography';
 import Box from "@mui/material/Box";

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { useSelector} from "react-redux";
-import { getMonth, getDayTask } from "../utlis";
+import { getMonth, getDayTask } from "../../utlis";
 
 import NewTask from "./NewTask";
 import TaskCardContainer from "./TaskCardContainer";
