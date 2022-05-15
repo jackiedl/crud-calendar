@@ -67,7 +67,7 @@ export default function TaskForm(props){
               </TabList>
             </Box>
             <NewTask value={"1"} date={props.date} close={props.close}/>
-            <TaskCardContainer value={"2"} tasks={todayTask}/>
+            <TaskCardContainer value={"2"} tasks={todayTask} />
           </TabContext>
         </Box>
       </DialogContent>
