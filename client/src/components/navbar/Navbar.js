@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { prevMonth, nextMonth } from "../../redux/actions/DateActions"
 import { menuClick } from '../../redux/actions/CalendarActions';
 
+import { MONTH } from "../utlis";
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,8 +14,6 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-
-const months = ["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "Novemeber", "December"];
 
 // (menuIcon) CRUD Calendar    Current Month  < > (Logout Icon)
 export default function NavBar() {
@@ -38,7 +38,7 @@ export default function NavBar() {
             <NavigateNextIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "#5f6368"}}>
-            {months[date.month-1] } {date.year}
+            {MONTH[date.month-1] } {date.year}
           </Typography>
           <Button style={{color: "#5f6368"}}> Logout </Button>
         </Toolbar>

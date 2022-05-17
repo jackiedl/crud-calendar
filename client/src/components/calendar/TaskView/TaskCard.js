@@ -80,7 +80,7 @@ export default function TaskCard(props){
           <AppBar position="relative" style={{ background: "transparent", boxShadow: "none"}}>
             <Toolbar variant="dense">
               {!showEdit ? 
-                <Typography variant="h4" component="div" sx={{ flexGrow: 1, color: "black"}}>
+                <Typography variant="h5" component="div" sx={{ flexGrow: 1, color: "black"}}>
                   {taskData.title}
                 </Typography> :
                 <TextField size="large" id="task-title" label="Title" variant="standard" value={taskData.title} onChange={(e) => setTaskData({...taskData, title: e.target.value})} sx={{flexGrow: 1}}/>

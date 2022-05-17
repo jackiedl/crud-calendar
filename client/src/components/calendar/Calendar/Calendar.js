@@ -1,12 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { getDaysArray, isToday } from "../../utlis";
+import { getDaysArray, isToday, WEEKDATE } from "../../utlis";
+
+import Menu from "../Menu/Menu";
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CalendarCell from "./CalendarCell";
-
-const weekname = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT",]
 
 export default function Calendar(){
   const cal = useSelector(state => state.calendar);
@@ -23,7 +23,7 @@ export default function Calendar(){
     return(
       <Box display="grid" gridTemplateColumns="repeat(7, 1fr)">
       {
-        weekname.map((val, index) => (
+        WEEKDATE.map((val, index) => (
         <Box key={val+index} gridColumn="span 1" sx={{flex: 1, borderLeft: "#dadce0 1px solid"}}>
           <Typography>
             {val}
@@ -49,7 +49,7 @@ export default function Calendar(){
   return(
     <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" sx={{textAlign: "center", borderTop: "#dadce0 1px solid"}}>
 
-      {cal.menuIsOpen ? <Box gridColumn="span 3" sx={{borderBottom: "#dadce0 1px solid"}}></Box> : ""}
+      {cal.menuIsOpen ? <Menu /> : ""}
 
       <Box gridColumn={cal.menuIsOpen ? "span 9" : "span 12"}>
         <Box sx={{ width: 1 }}>
