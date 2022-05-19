@@ -15,6 +15,8 @@ export const getTasks = async (req, res) => {
 export const createTasks = async (req, res) => {
   const task = req.body;
 
+  if (!req.userId) return res.json({ message: "Unauthenticated"});
+
   const newTask = new PostTask(task);
 
   try{
