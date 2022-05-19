@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 
+import { signup } from "../../redux/actions/AuthActions";
+
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Copyright from "../copyright/Copyright";
 
 import Avatar from '@mui/material/Avatar';
@@ -24,12 +28,13 @@ const initialState = {
 const theme = createTheme();
 
 export default function SignUp() {
-
   const [formData, setFormData] = useState(initialState)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+    dispatch(signup(formData, navigate));
   };
 
   const handleChange = (event) => {
@@ -57,58 +62,19 @@ export default function SignUp() {
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                  onChange={handleChange}
-                />
+                <TextField autoComplete="given-name" name="firstName" required fullWidth id="firstName" label="First Name" autoFocus onChange={handleChange} />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                  onChange={handleChange}
-                />
+                <TextField required fullWidth id="lastName" label="Last Name" name="lastName" autoComplete="family-name" onChange={handleChange} />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  onChange={handleChange}
-                />
+                <TextField required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={handleChange} />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  onChange={handleChange}
-                />
+                <TextField required fullWidth name="password" label="Password" type="password" id="password" autoComplete="new-password" onChange={handleChange} />
               </Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} >
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">

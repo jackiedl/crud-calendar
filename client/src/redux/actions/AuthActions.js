@@ -1,21 +1,31 @@
 import { AUTH } from "../../redux/types/AuthActionTypes";
-import * as api from "../../api";
+import * as api from "../../api/index";
 
-export const signIn = (formData, history) => async (dispatch) => {
+export const signin = (formData, navigate) => async (dispatch) => {
   try{
     //log in the user...
+    const { data } = await api.signIn(formData);
 
-    history.push("/")
+    dispatch({ type: AUTH, data});
+
+    navigate("/home");
+
   }catch(error){
     console.log(error);
   }
 }
 
-export const signUp = (formData, history) => async (dispatch) => {
+export const signup = (formData, navigate) => async (dispatch) => {
   try{
-    //sign up the user...
-    history.push("/")
+    //sign up the user..
+    const { data } = await api.signUp(formData);
+
+    dispatch({ type: AUTH, data});
+
+    navigate("/");
+
   }catch(error){
+
     console.log(error);
   }
 }

@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 
+import { signin } from "../../redux/actions/AuthActions";
+
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Copyright from "../copyright/Copyright";
 
 import Avatar from '@mui/material/Avatar';
@@ -14,7 +18,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-
 const initialState = {
   email: "",
   password:"",
@@ -24,10 +27,12 @@ const theme = createTheme();
 
 export default function Login() {
   const [formData, setFormData] = useState(initialState)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formData)
+    dispatch(signin(formData, navigate));
   };
 
   const handleChange = (event) => {
@@ -35,17 +40,11 @@ export default function Login() {
   }
 
   return (
+   
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
+        <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', }} >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -53,36 +52,13 @@ export default function Login() {
             CRUD Calendar Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={handleChange}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={handleChange}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
+            <TextField margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus onChange={handleChange} />
+            <TextField margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" onChange={handleChange} />
+            <Grid container>
+              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 1 }}>
+                Sign In
+              </Button>
+            </Grid>
             <Grid container>
               <Grid item>
                 <Link href="/signup" variant="body2">
@@ -95,5 +71,6 @@ export default function Login() {
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
+   
   );
 }

@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { getTasks } from "../../redux/actions/TaskActions";
 
 export default function Home(){
+
   const dispatch = useDispatch();
 
   useEffect(() => {
