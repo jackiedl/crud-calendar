@@ -38,7 +38,7 @@ export const updateTask = async (req, res) => {
 
   const updatedTask = await PostTask.findByIdAndUpdate(_id, task, {new: true});
 
-  res.json(updateTask);
+  res.json(updatedTask);
 
 }
 
