@@ -19,6 +19,7 @@ export function getDayTask(today, tasks){
   }
   return todayTask;
 }
+
 export function getDaysArray(month, year){
   const prevMonth = (month - 1 > 1 ? month - 1 : 12)
   const prevYear = (prevMonth === 12 ? year - 1: year);

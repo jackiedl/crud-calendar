@@ -6,6 +6,7 @@ import { updateTask, deleteTask } from "../../../redux/actions/TaskActions";
 import AppBar from '@mui/material/AppBar';
 import Box from "@mui/material/Box";
 import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
@@ -15,10 +16,12 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 export default function TaskCard(props){
+  const [user] = useState(JSON.parse(localStorage.getItem("profile")));
   const [taskData, setTaskData] = useState({
-    creator: "Admin",
+    creator: user.result._id,
     title:props.task.title,
     description: props.task.description,
+    complete: props.task.complete,
     date: props.task.date
   });
 
@@ -35,9 +38,10 @@ export default function TaskCard(props){
     setShowFull(false);
     setShowEdit(false);
     setTaskData({
-      creator: "Admin",
+      creator: user.result._id,
       title:props.task.title,
       description: props.task.description,
+      complete: props.task.complete,
       date: props.task.date
     })
   }
@@ -46,13 +50,37 @@ export default function TaskCard(props){
     if (showEdit){
       setShowEdit(false);
       setTaskData({
-        creator: "Admin",
+        creator: user.result._id,
         title:props.task.title,
         description: props.task.description,
+        complete: props.task.complete,
         date: props.task.date
       })
     }else{
       setShowEdit(true);
+    }
+  }
+
+  const handleComplete = () => {
+    if (taskData.complete){
+      dispatch(updateTask(props.task._id, {...taskData, complete: false}));
+      setTaskData({
+        creator: user.result._id,
+        title:props.task.title,
+        description: props.task.description,
+        complete: false,
+        date: props.task.date
+      })
+    }
+    else{
+      dispatch(updateTask(props.task._id, {...taskData, complete: true}));
+      setTaskData({
+        creator: user.result._id,
+        title:props.task.title,
+        description: props.task.description,
+        complete: true,
+        date: props.task.date
+      })
     }
   }
 
@@ -73,9 +101,13 @@ export default function TaskCard(props){
   return(
     <Box sx={{marginBottom: 1 }}>
       { !showFull ?
-        <Button fullWidth variant="contained" sx={{justifyContent: "flex-start" }} onClick={handleOpen}>
-          <Typography> {taskData.title}</Typography>
-        </Button> :
+        <Box display="flex" flexDirection="row"> 
+          <Checkbox checked={taskData.complete} onChange={handleComplete}/>
+          <Button fullWidth variant="contained" sx={{justifyContent: "flex-start" }} onClick={handleOpen}>
+            <Typography> {taskData.title}</Typography>
+          </Button>
+        </Box>
+         :
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="relative" style={{ background: "transparent", boxShadow: "none"}}>
             <Toolbar variant="dense">

@@ -10,10 +10,13 @@ import TabPanel from '@mui/lab/TabPanel';
 import TextField from '@mui/material/TextField';
 
 export default function NewTask(props){
+  const [user] = useState(JSON.parse(localStorage.getItem("profile")));
+
   const [taskData, setTaskData] = useState({
-    creator: "Admin",
+    creator: user.result._id,
     title:"",
     description: "",
+    complete: false,
     date: props.date
   });
 

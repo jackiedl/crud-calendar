@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { prevMonth, nextMonth } from "../../redux/actions/DateActions"
 import { menuClick } from '../../redux/actions/CalendarActions';
@@ -15,32 +15,16 @@ import MenuIcon from '@mui/icons-material/Menu';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
-import { useNavigate, useLocation } from 'react-router-dom';
-
 // (menuIcon) CRUD Calendar    Current Month  < > (Logout Icon)
-export default function NavBar() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+export default function NavBar(props) {
 
   const date = useSelector(state => state.date);
   const calendar = useSelector(state => state.calendar);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const logout = () => {
-    dispatch({type: "LOGOUT"});
-    navigate("/");
-    setUser(null);
+    props.logout();
   }
-
-  useEffect(() => {
-    //const token = user?.token;
-
-    //JWT...
-
-    setUser(JSON.parse(localStorage.getItem("profile")));
-
-  }, [location]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>

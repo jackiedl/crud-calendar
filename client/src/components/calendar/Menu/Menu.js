@@ -1,6 +1,9 @@
 import React from "react";
 
-import { useSelector } from "react-redux";
+import Checkbox from '@mui/material/Checkbox';
+
+import { useSelector, useDispatch } from "react-redux";
+import { updateTask } from "../../../redux/actions/TaskActions";
 import { getMonth } from "../../utlis";
 
 import Box from '@mui/material/Box';
@@ -9,6 +12,7 @@ import Typography from '@mui/material/Typography';
 export default function Menu(){
   const date = useSelector(state => state.date);
   const tasks = useSelector(state => state.task);
+  const dispatch = useDispatch();
 
   const getMonthTask = () => {
     let task =  tasks.filter(task => task.date.month === date.month && task.date.year === date.year);
@@ -29,6 +33,11 @@ export default function Menu(){
  
   const taskDays = getTaskDays();
 
+  const handleComplete = (event) => {
+    console.log(event.target);
+   
+  }
+
   const showAllTask = () => {
     return ( 
       taskDays.map((day, index) => (
@@ -36,7 +45,10 @@ export default function Menu(){
           <Typography variant="h5" sx={{marginLeft: 1, textAlign:"left", color: "black"}}>{getMonth(date.month-1)} {day} </Typography>
           {
             monthTask.filter((t => t.date.day === day)).map((task, index) => (
-              <Typography key={index}variant="h6" component="div" sx={{ marginLeft: 2, textAlign:"left",flexGrow: 1, color: "black"}}> {task.title}</Typography> 
+              <Box key={index} display="flex" flexDirection="row">
+                <Checkbox checked={task.complete} onChange={handleComplete} id={task._id} value={task.complete}/>
+                <Typography variant="h6" component="div" align="center" sx={{ m: 1, textAlign:"left", flexGrow: 1, color: "black"}}> {task.title}</Typography> 
+              </Box>
             ))
           } 
         </Box>
