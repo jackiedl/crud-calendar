@@ -115,7 +115,7 @@ export default function TaskCard(props){
                 <Typography variant="h5" component="div" sx={{ flexGrow: 1, color: "black"}}>
                   {taskData.title}
                 </Typography> :
-                <TextField size="large" id="task-title" label="Title" variant="standard" value={taskData.title} onChange={(e) => setTaskData({...taskData, title: e.target.value})} sx={{flexGrow: 1}}/>
+                <TextField size="large" autoComplete="off" id="task-title" label="Title" variant="standard" value={taskData.title} onChange={(e) => setTaskData({...taskData, title: e.target.value})} sx={{flexGrow: 1}}/>
               }
               <IconButton size="small" edge="start" aria-label="menu" sx={{ mr: 1, color: "#5f6368" }} onClick={handleEditOpen}>
                 <EditIcon />
@@ -129,8 +129,8 @@ export default function TaskCard(props){
             </Toolbar>
             <Toolbar>
               {!showEdit ? 
-              <Typography component="div" sx={{ flexGrow: 1, color: "black"}}> {taskData.description}</Typography>:
-              <TextField size="small" id="task-description" label="Description" multiline rows={1} variant="standard" value={taskData.description} onChange={(e) => setTaskData({...taskData, description: e.target.value})} sx={{flexGrow: 1}}/>
+              <Typography component="div" noWrap={false} sx={{ flexGrow: 1, color: "black"}}> {taskData.description}</Typography>:
+              <TextField size="small" autoComplete="off" id="task-description" label="Description" multiline rows={2} variant="standard" value={taskData.description} onChange={(e) => setTaskData({...taskData, description: e.target.value})} sx={{mt: 1, mb: 1, flexGrow: 1}}/>
               }
             </Toolbar>   
             {showEdit ? <Button onClick={handleUpdateSave}> Save</Button> : ""}

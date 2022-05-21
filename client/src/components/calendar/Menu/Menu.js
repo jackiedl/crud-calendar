@@ -3,8 +3,11 @@ import React from "react";
 import Checkbox from '@mui/material/Checkbox';
 
 import { useSelector, useDispatch } from "react-redux";
-import { updateTask } from "../../../redux/actions/TaskActions";
+import { updateTask, deleteTask } from "../../../redux/actions/TaskActions";
 import { getMonth } from "../../utlis";
+
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -19,6 +22,7 @@ export default function Menu(){
     task.sort((a,b) => a.date.day - b.date.day);
     return task
   }
+
   const monthTask = getMonthTask();
 
   const getTaskDays = () => {
@@ -30,13 +34,8 @@ export default function Menu(){
     }
     return days;
   }
- 
-  const taskDays = getTaskDays();
 
-  const handleComplete = (event) => {
-    console.log(event.target);
-   
-  }
+  const taskDays = getTaskDays();
 
   const showAllTask = () => {
     return ( 
@@ -46,8 +45,16 @@ export default function Menu(){
           {
             monthTask.filter((t => t.date.day === day)).map((task, index) => (
               <Box key={index} display="flex" flexDirection="row">
-                <Checkbox checked={task.complete} onChange={handleComplete} id={task._id} value={task.complete}/>
+                <Checkbox 
+                  checked={task.complete} 
+                  onChange={() => task.complete ? 
+                    dispatch(updateTask(task._id, {...task, complete: false} )) : 
+                    dispatch(updateTask(task._id, {...task, complete: true} ))} 
+                />
                 <Typography variant="h6" component="div" align="center" sx={{ m: 1, textAlign:"left", flexGrow: 1, color: "black"}}> {task.title}</Typography> 
+                <IconButton size="large" edge="start" aria-label="menu" sx={{ mr: 1, color: "#5f6368" }} onClick={() => dispatch(deleteTask(task._id))}>
+                  <DeleteIcon id={task._id}/>
+                </IconButton>
               </Box>
             ))
           } 

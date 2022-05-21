@@ -31,8 +31,27 @@ export default function NewTask(props){
   return(
     <TabPanel value={props.value}>
         <Box component="form" noValidate autoComplete="off" sx={{'& .MuiTextField-root': { m: 1}, }}>
-          <TextField fullWidth={true} id="task-title" label="Add Task Title" variant="filled" value={taskData.title} onChange={(e) => setTaskData({...taskData, title: e.target.value})}/>
-          <TextField fullWidth={true} id="task-description" label="Description" multiline rows={4} variant="filled" value={taskData.description} onChange={(e) => setTaskData({...taskData, description: e.target.value})} />
+          <TextField 
+            required 
+            fullWidth={true} 
+            autoComplete="off" 
+            id="task-title" 
+            label="Add Task Title" 
+            variant="filled" 
+            value={taskData.title} 
+            inputProps={{ maxLength: 25 }}
+            onChange={(e) => setTaskData({...taskData, title: e.target.value})}
+          />
+          <TextField 
+            fullWidth={true} 
+            autoComplete="off" 
+            id="task-description" 
+            label="Description" 
+            multiline rows={4} 
+            variant="filled" 
+            value={taskData.description} 
+            onChange={(e) => setTaskData({...taskData, description: e.target.value})} 
+          />
         </Box>
         <DialogActions>
           <Button onClick={handleSubmit} sx={{}}>
