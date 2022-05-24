@@ -5,6 +5,7 @@ import Box from "@mui/material/Box"
 import Calendar from "../calendar/Calendar/Calendar";
 import Navbar from "../navbar/Navbar";
 
+import decode from "jwt-decode";
 
 import { useDispatch } from "react-redux";
 import { getTasks } from "../../redux/actions/TaskActions";
@@ -28,6 +29,19 @@ export default function Home(){
     }else{
       dispatch(getTasks(user));
     }    
+
+    const token = user?.token;
+
+      if (token){
+        const decodedToken = decode(token);
+
+        if (decodedToken.exp * 1000 < new Date().getTime()){
+          dispatch({type: "LOGOUT"});
+          navigate("/");
+          setUser(null);
+        }
+      }
+
   }, [dispatch, location, navigate, user])
 
   return(

@@ -23,9 +23,11 @@ export default function NewTask(props){
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(createTask(taskData))
-    props.close();
+    if (taskData.title.length > 0){
+      e.preventDefault();
+      dispatch(createTask(taskData))
+      props.close();
+    }
   }
 
   return(
@@ -54,7 +56,7 @@ export default function NewTask(props){
           />
         </Box>
         <DialogActions>
-          <Button onClick={handleSubmit} sx={{}}>
+          <Button onClick={handleSubmit}>
             Submit
           </Button>
         </DialogActions> 
