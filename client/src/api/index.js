@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http:/https://jdl-crud-calendar.herokuapp.com/"})
+const API = axios.create({ baseURL: "https://jdl-crud-calendar.herokuapp.com/"})
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
