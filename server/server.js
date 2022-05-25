@@ -18,6 +18,10 @@ app.use(cors());
 app.use("/tasks", PostTaskRoutes);
 app.use("/users", UserRoute);
 
+app.get("/", (req, res) => {
+  res.send("hello to crud calendar api")
+})
+
 const CONNECTION_URL = process.env.CONNECTION_URL;
 const PORT = process.env.PORT || 5000;
 
