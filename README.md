@@ -2,6 +2,8 @@
 
 This project is a full stack MERN Calendar Applicaiton that Allows you to Create, Read, Update, and Delete Tasks 
 
+Sign up and add your tasks: https://jdl-crud-calendar.web.app/
+
 ## Project Details
 
 This project was bootstrapped with React + Express + MongoBD and was deployed with Firebase for the Frontend and Heroku for the Backend
